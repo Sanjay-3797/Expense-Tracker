@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { Switch, Route } from "react-router-dom";
+import AuthForm from "./components/AuthForm";
+import Home from "./components/Home";
+import AuthContext from "./store/auth-context";
+import MainNavigation from "./components/MainNavigation";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <MainNavigation />
+      <Switch>
+        <Route path="/" exact>
+          <AuthForm />
+        </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+      </Switch>
+    </React.Fragment>
   );
 }
 
