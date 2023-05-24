@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import classes from "./Profile.module.css";
 import AuthContext from "../store/auth-context";
 
@@ -6,6 +6,30 @@ const Profile = () => {
   const enteredFullNameInputRef = useRef();
   const enteredPhotoUrlInputRef = useRef();
   const authCtx = useContext(AuthContext);
+
+  const fetchUserData = useCallback(async () => {
+    try {
+      const response = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyBvar-s74g5hqBR2193rvUrs76CPBPnbDc",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            idToken: authCtx.token,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.users);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [authCtx.token]);
+  useEffect(() => {
+    fetchUserData();
+  }, [fetchUserData]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

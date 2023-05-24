@@ -3,6 +3,6 @@
     text-align: center;
 }
 
-.home h3 {
-    font-size: rem;
+.home link {
+    text-decoration: none;
 }
