@@ -61,6 +61,7 @@ const Profile = () => {
       console.log(error);
     }
   };
+  console.log(userData);
 
   const submitHandler = async (e) => {
     e.preventDefault();
