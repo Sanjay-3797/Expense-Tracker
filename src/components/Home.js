@@ -4,7 +4,7 @@ import classes from "./Home.module.css";
 const Home = () => {
   return (
     <section className={classes.home}>
-      <h1>Welcome on Board!</h1>
+      <h3>Welcome to Expense Tracker App!</h3>
     </section>
   );
 };

@@ -7,7 +7,7 @@ import MainNavigation from "./components/MainNavigation";
 
 function App() {
   const authCtx = useContext(AuthContext);
-
+  
   return (
     <React.Fragment>
       <MainNavigation />
@@ -15,9 +15,11 @@ function App() {
         <Route path="/" exact>
           <AuthForm />
         </Route>
+        {authCtx.isLoggedIn && (
           <Route path="/home">
             <Home />
           </Route>
+        )}
       </Switch>
     </React.Fragment>
   );
