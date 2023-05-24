@@ -1,11 +1,22 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import classes from "./Profile.module.css";
 import AuthContext from "../store/auth-context";
 
 const Profile = () => {
+  const [userData, setUserData] = useState(null);
   const enteredFullNameInputRef = useRef();
   const enteredPhotoUrlInputRef = useRef();
   const authCtx = useContext(AuthContext);
+
+  if (userData) {
+    authCtx.setName(userData[0].displayName);
+  }
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -22,7 +33,7 @@ const Profile = () => {
         }
       );
       const data = await response.json();
-      console.log(data.users);
+      setUserData(data.users);
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +41,26 @@ const Profile = () => {
   useEffect(() => {
     fetchUserData();
   }, [fetchUserData]);
+
+  const emailVerificationHandler = async () => {
+    try {
+      const response = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBvar-s74g5hqBR2193rvUrs76CPBPnbDc",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            requestType: "VERIFY_EMAIL",
+            idToken: authCtx.token,
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -73,6 +104,16 @@ const Profile = () => {
         </div>
         <div className={classes.actions}>
           <button type="submit">Update</button>
+        </div>
+        <div className={classes.actions}>
+          <button
+            type="button"
+            onClick={() => {
+              emailVerificationHandler();
+            }}
+          >
+            Verify Email
+          </button>
         </div>
       </form>
     </section>

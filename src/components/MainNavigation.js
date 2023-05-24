@@ -36,6 +36,11 @@ const MainNavigation = () => {
               <button onClick={logoutHandler}>Logout</button>
             </li>
           )}
+          {isLoggedIn && authCtx.displayName && (
+            <li>
+              <Link to="/profile">Welcome {authCtx.displayName}!</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

@@ -16,6 +16,12 @@
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
+.profile h2 {
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
 
 .profile input {
     font: inherit;
