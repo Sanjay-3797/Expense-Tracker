@@ -57,7 +57,7 @@
     align-items: center;
 }
 
-.actions button {
+.main button {
     cursor: pointer;
     font: inherit;
     color: white;
@@ -65,4 +65,13 @@
     border: 1px solid #9f5ccc;
     border-radius: 4px;
     padding: 0.5rem 2.5rem;
+}
+
+.main li{
+    list-style: none;
+}
+
+.actions button:hover {
+    background-color: #873abb;
+    border-color: #873abb;
 }

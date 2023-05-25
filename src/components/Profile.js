@@ -1,22 +1,11 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import classes from "./Profile.module.css";
 import AuthContext from "../store/auth-context";
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
   const enteredFullNameInputRef = useRef();
   const enteredPhotoUrlInputRef = useRef();
   const authCtx = useContext(AuthContext);
-
-  if (userData) {
-    authCtx.setName(userData[0].displayName);
-  }
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -33,7 +22,7 @@ const Profile = () => {
         }
       );
       const data = await response.json();
-      setUserData(data.users);
+      console.log(data.users);
     } catch (error) {
       console.log(error);
     }
