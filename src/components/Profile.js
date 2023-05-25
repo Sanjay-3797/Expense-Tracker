@@ -56,12 +56,10 @@ const Profile = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(userData);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -86,7 +84,6 @@ const Profile = () => {
         }
       );
       const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

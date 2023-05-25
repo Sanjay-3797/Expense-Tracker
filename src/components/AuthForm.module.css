@@ -13,6 +13,7 @@
 .auth h1 {
     text-align: center;
     color: white;
+    text-decoration: none;
 }
 
 .control {

@@ -17,6 +17,30 @@ const AuthForm = () => {
     setIsLogin((prevState) => !prevState);
   };
 
+  const forgotPasswordHandler = async (event) => {
+    event.preventDefault();
+
+    const enteredEmail = emailInputRef.current.value;
+
+    try {
+      const response = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBvar-s74g5hqBR2193rvUrs76CPBPnbDc",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            requestType: "PASSWORD_RESET",
+            email: enteredEmail,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {}
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -83,6 +107,15 @@ const AuthForm = () => {
             required
             ref={passwordInputRef}
           />
+        </div>
+        <div className={classes.control}>
+          <a
+            className={classes.actions}
+            href="/"
+            onClick={forgotPasswordHandler}
+          >
+            Forgot Password?
+          </a>
         </div>
         <div className={classes.actions}>
           {!isLoading && (
