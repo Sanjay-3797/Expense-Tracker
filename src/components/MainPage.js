@@ -6,14 +6,27 @@ const MainPage = () => {
   const enteredAmountRef = useRef();
   const enteredCategoryRef = useRef();
   const [expenseList, setExpenseList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchingExpenseData = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         "https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData.json"
       );
       const data = await response.json();
-      console.log(data);
+
+      let updatedExpenses = [];
+      for (const key in data) {
+        updatedExpenses.push({
+          id: key,
+          title: data[key].title,
+          amount: data[key].amount,
+          category: data[key].category,
+        });
+      }
+      setExpenseList(updatedExpenses);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,10 +65,46 @@ const MainPage = () => {
     } catch (error) {
       console.log(error);
     }
+  };
 
-    setExpenseList((prevData) => {
-      return [...prevData, expenseList];
-    });
+  const deleteExpenseHandler = async (expenseId) => {
+    try {
+      const response = await fetch(
+        `https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData/${expenseId}.json`,
+        { method: "DELETE" }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editExpenseHandler = async (expenseId) => {
+    const title = enteredTitleRef.current.value;
+    const amount = enteredAmountRef.current.value;
+    const category = enteredCategoryRef.current.value;
+
+    const expenseList = {
+      title: title,
+      amount: amount,
+      category: category,
+    };
+
+    try {
+      const response = await fetch(
+        `https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData/${expenseId}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify(expenseList),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -85,15 +134,35 @@ const MainPage = () => {
           </div>
         </form>
       </section>
-      {expenseList.length && (
+      {!isLoading && (
         <section className={classes.main}>
           {expenseList.map((expense) => (
-            <li key={expense.title}>
-              Added {expense.title} of {expense.amount} Rs to {expense.category}{" "}
-              Category
-            </li>
+            <div className={classes.actions} key={expense.id}>
+              {expense.title} ---- {expense.amount} ---- {expense.category}
+              <div className={classes.control}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    editExpenseHandler(expense.id);
+                  }}
+                >
+                  EDIT
+                </button>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  deleteExpenseHandler(expense.id);
+                }}
+              >
+                X
+              </button>
+            </div>
           ))}
         </section>
+      )}
+      {isLoading && (
+        <section className={classes.main}>Fetching Expenses...</section>
       )}
     </React.Fragment>
   );
