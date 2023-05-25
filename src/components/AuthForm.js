@@ -108,14 +108,10 @@ const AuthForm = () => {
             ref={passwordInputRef}
           />
         </div>
-        <div className={classes.control}>
-          <a
-            className={classes.actions}
-            href="/"
-            onClick={forgotPasswordHandler}
-          >
+        <div className={classes.actions}>
+          <button className={classes.toggle} onClick={forgotPasswordHandler}>
             Forgot Password?
-          </a>
+          </button>
         </div>
         <div className={classes.actions}>
           {!isLoading && (

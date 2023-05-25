@@ -56,6 +56,7 @@ const Profile = () => {
         }
       );
       const data = await response.json();
+      console.log(`emailVerificationHandler-${data}`);
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +85,7 @@ const Profile = () => {
         }
       );
       const data = await response.json();
+      console.log(`formsubmitHandler-${data}`);
     } catch (error) {
       console.log(error);
     }
