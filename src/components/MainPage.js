@@ -186,11 +186,6 @@ const MainPage = () => {
               Download Expenses
             </a>
           )}
-          {/* <div className={classes.expenseTitle}>
-            <row>Title</row>
-            <row>Category</row>
-            <row>Amount</row>
-          </div> */}
           {expenseList.map((expense) => (
             <div className={classes.expense} key={expense.id}>
               <row>{expense.title}</row>
