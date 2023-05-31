@@ -1,13 +1,26 @@
 .main {
-    margin: 3rem auto;
+    margin: 2rem auto;
     width: 95%;
-    max-width: 25rem;
+    max-width: 35rem;
     border-radius: 6px;
     background-color: #38015c;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     padding: 1rem;
     text-align: center;
     color: white;
+}
+
+.theme{
+    cursor: pointer;
+    margin: 0.5rem auto;
+    border-radius: 6px;
+    background-color: #090909;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    justify-self: center;
+    float: right;
 }
 
 .main label {
@@ -22,6 +35,19 @@
     color: white;
     font-weight: bold;
     margin-bottom: 0.5rem;
+}
+.main a {
+    display: block;
+    color: white;
+    width: 50%;
+    max-width: 15rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    color: #1364e6;
+    border: #1364e6 2px solid;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .main input {
@@ -49,6 +75,22 @@
 .control {
     margin-bottom: 0.5rem;
 }
+.expense{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-top: 1.5rem;
+    max-height: 40px;
+    margin: 20px;
+}
+.expenseTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-top: 1.5rem;
+    max-height: 40px;
+    margin: 20px;
+}
 
 .actions {
     margin-top: 1.5rem;
@@ -64,13 +106,8 @@
     background-color: #9f5ccc;
     border: 1px solid #9f5ccc;
     border-radius: 4px;
-    padding: 0.5rem 2.5rem;
-}
-
-.main li{
-    list-style: none;
-    display: flex;
-    justify-content: space-evenly;
+    padding: 0.5rem 1rem;
+    justify-self: center;
 }
 
 .actions button:hover {

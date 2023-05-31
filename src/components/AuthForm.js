@@ -1,14 +1,14 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./AuthForm.module.css";
-import AuthContext from "../store/auth-context";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/index";
 
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const history = useHistory();
-
-  const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,7 +83,7 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
+        dispatch(authActions.login(data.idToken));
         history.replace("/main");
       })
       .catch((err) => {

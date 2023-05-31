@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import AuthForm from "./components/AuthForm";
 import Home from "./components/Home";
-import AuthContext from "./store/auth-context";
 import MainNavigation from "./components/MainNavigation";
 import Profile from "./components/Profile";
 import MainPage from "./components/MainPage";
+import { useSelector } from "react-redux";
 
 function App() {
-  const authCtx = useContext(AuthContext);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   return (
     <React.Fragment>
@@ -17,17 +17,17 @@ function App() {
         <Route path="/" exact>
           <AuthForm />
         </Route>
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path="/home">
             <Home />
           </Route>
         )}
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path="/profile">
             <Profile />
           </Route>
         )}
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path="/main">
             <MainPage />
           </Route>
