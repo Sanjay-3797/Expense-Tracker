@@ -1,11 +1,12 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import classes from "./Profile.module.css";
-import AuthContext from "../store/auth-context";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const enteredFullNameInputRef = useRef();
   const enteredPhotoUrlInputRef = useRef();
-  const authCtx = useContext(AuthContext);
+
+  const token = useSelector((state) => state.token);
 
   const fetchUserData = useCallback(async () => {
     try {
@@ -14,7 +15,7 @@ const Profile = () => {
         {
           method: "POST",
           body: JSON.stringify({
-            idToken: authCtx.token,
+            idToken: token,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -26,7 +27,7 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [authCtx.token]);
+  }, [token]);
   useEffect(() => {
     fetchUserData();
   }, [fetchUserData]);
@@ -39,7 +40,7 @@ const Profile = () => {
           method: "POST",
           body: JSON.stringify({
             requestType: "VERIFY_EMAIL",
-            idToken: authCtx.token,
+            idToken: token,
           }),
           headers: { "Content-Type": "application/json" },
         }
@@ -63,7 +64,7 @@ const Profile = () => {
         {
           method: "POST",
           body: JSON.stringify({
-            idToken: authCtx.token,
+            idToken: token,
             displayName: fullName,
             photoUrl: photoURL,
             returnSecureToken: true,

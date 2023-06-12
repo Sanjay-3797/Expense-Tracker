@@ -44,8 +44,8 @@
     font-weight: bold;
     margin-bottom: 1.5rem;
     text-decoration: none;
-    color: #1364e6;
-    border: #1364e6 2px solid;
+    color: #9f5ccc;
+    border: #9f5ccc 2px solid;
     border-radius: 5px;
     padding: 5px;
 }
@@ -75,14 +75,19 @@
 .control {
     margin-bottom: 0.5rem;
 }
+
 .expense{
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     margin-top: 1.5rem;
-    max-height: 40px;
     margin: 20px;
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 4px;
+    max-height: 5.2rem;
 }
+
 .expenseTitle{
     display: flex;
     flex-direction: row;

@@ -28,7 +28,7 @@ const MainPage = () => {
   }
   if (totalAmount > 10000) {
     dispatch(authActions.activatePremium());
-    localStorage.setItem("activatePremium", true);
+    // localStorage.setItem("activatePremium", "active");
   }
 
   const themeHandler = () => {
@@ -89,6 +89,7 @@ const MainPage = () => {
       );
       const data = await response.json();
       console.log(data);
+      fetchingExpenseData();
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +102,7 @@ const MainPage = () => {
         { method: "DELETE" }
       );
       console.log(response);
+      fetchingExpenseData();
     } catch (error) {
       console.log(error);
     }
@@ -129,6 +131,7 @@ const MainPage = () => {
         }
       );
       console.log(response);
+      fetchingExpenseData();
     } catch (error) {
       console.log(error);
     }

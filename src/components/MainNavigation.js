@@ -50,7 +50,7 @@ const MainNavigation = () => {
               <button onClick={logoutHandler}>Logout</button>
             </li>
           )}
-          {premium && (
+          {isLoggedIn && premium && (
             <li>
               <button
                 onClick={premiumHandler}
