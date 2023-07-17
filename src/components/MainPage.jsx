@@ -35,12 +35,12 @@ const MainPage = () => {
     dispatch(authActions.setTheme());
   };
 
+  const url = `https://new-data-4a874-default-rtdb.firebaseio.com/expenseData`;
+
   const fetchingExpenseData = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        "https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData.json"
-      );
+      const response = await fetch(`${url}.json`);
       const data = await response.json();
 
       let updatedExpenses = [];
@@ -57,7 +57,7 @@ const MainPage = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     fetchingExpenseData();
@@ -77,16 +77,13 @@ const MainPage = () => {
     };
 
     try {
-      const response = await fetch(
-        "https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData.json",
-        {
-          method: "POST",
-          body: JSON.stringify(expenseList),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${url}.json`, {
+        method: "POST",
+        body: JSON.stringify(expenseList),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       console.log(data);
       fetchingExpenseData();
@@ -97,10 +94,9 @@ const MainPage = () => {
 
   const deleteExpenseHandler = async (expenseId) => {
     try {
-      const response = await fetch(
-        `https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData/${expenseId}.json`,
-        { method: "DELETE" }
-      );
+      const response = await fetch(`${url}/${expenseId}.json`, {
+        method: "DELETE",
+      });
       console.log(response);
       fetchingExpenseData();
     } catch (error) {
@@ -120,16 +116,13 @@ const MainPage = () => {
     };
 
     try {
-      const response = await fetch(
-        `https://expense-tracker-48ec2-default-rtdb.firebaseio.com/expenseData/${expenseId}.json`,
-        {
-          method: "PUT",
-          body: JSON.stringify(expenseList),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${url}/${expenseId}.json`, {
+        method: "PUT",
+        body: JSON.stringify(expenseList),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response);
       fetchingExpenseData();
     } catch (error) {
